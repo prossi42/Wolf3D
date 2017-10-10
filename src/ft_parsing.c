@@ -55,6 +55,8 @@ void	ft_checksd(t_a *a)
 			break;
 	}
 	ft_putnbr(a->b.count);
+
+	LE PUTAIN DE COUNT QUI MARCHE PAS A CAUSE CONDITION IF if (a->buf[i] >= 0 && a->buf[i] <= 9)
 }
 
 int		ft_count(t_a *a)
