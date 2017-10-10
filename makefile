@@ -16,7 +16,7 @@ NAME = wolf3d
 
 SRC_PATH = src
 
-SRC_NAME = main.c
+SRC_NAME = main.c ft_affich.c ft_parsing.c ft_init_struct.c
 
 # OBJ_PATH = $(SRC_PATH)
 
@@ -37,7 +37,7 @@ all: $(NAME)
 opti: $(SRC)
 		cd libft/ ; make re ; make clean ; cd ..
 		cd mlx/ ; make re ; cd ..
-		$(CC) $(LDFLAGS) $(LDLIBS) -o fractol $^ $(CFLAGSOPTI)
+		$(CC) $(LDFLAGS) $(LDLIBS) -o wolf3d $^ $(CFLAGSOPTI)
 
 $(NAME): $(SRC)
 	cd libft/ ; make re; make clean ; cd ..

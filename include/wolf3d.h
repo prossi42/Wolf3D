@@ -19,10 +19,25 @@
 # define WINSIZE_X 600
 # define WINSIZE_Y 600
 
+typedef struct		s_b
+{
+	int				count;
+	int				countsp;
+	int				countnl;
+	int				tmp;
+	int				tmpsp;
+	int				i;
+	int				ct;
+}					t_b;
+
 typedef struct		s_a
 {
-	void			*init;
-	void			*wdow;
+	int				fd;
+	char			*buf;
+	t_b				b;
 }					t_a;
 
+void				ft_affich(t_a *a, int option);
+void				ft_init_struct(t_a *a, int option);
+int					ft_parsing(t_a *a);
 #endif

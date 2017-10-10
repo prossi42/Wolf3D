@@ -1,45 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_affich.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/09 14:44:46 by prossi            #+#    #+#             */
-/*   Updated: 2017/10/09 14:44:53 by prossi           ###   ########.fr       */
+/*   Created: 2017/10/10 09:48:19 by prossi            #+#    #+#             */
+/*   Updated: 2017/10/10 09:48:21 by prossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
 
-int		ft_open(t_a *a, char *argv)
+void		ft_affich(t_a *a, int option)
 {
-	if ((a->fd = open(argv, O_RDONLY)) == -1)
-		return (-1);
-	if (!(a->buf = ft_readfile(a->fd)))
-		return (-1);
-	return (0);
-}
-
-int		main(int argc, char **argv)
-{
-	t_a		a;
-
-	(void)argv;
-	if (argc != 2)
+	(void)a;
+	if (option == 0)
 	{
-		ft_affich(&a, 0);
-		return (-1);
+		ft_putstr("\nusage : ./wolf3d map\n");
+		ft_putstr("\t ---> Square map only fill with 0 -> 9 and spaces\n\n");
 	}
-	if (ft_open(&a, argv[1]) == -1)
-	{
-		ft_affich(&a, 1);
-		return (-1);
-	}
-	if (ft_parsing(&a) == -1)
-	{
-		ft_affich(&a, 2);
-		return (-1);
-	}
-	return (0);
+	if (option == 1)
+		ft_putstr("\nError in Open or Read functions\n\n");
+	if (option == 2)
+		ft_putstr("\nMap error, consult usage --> ./wolf3d\n\n");
 }

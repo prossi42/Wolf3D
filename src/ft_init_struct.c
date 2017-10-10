@@ -1,45 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_init_struct.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/09 14:44:46 by prossi            #+#    #+#             */
-/*   Updated: 2017/10/09 14:44:53 by prossi           ###   ########.fr       */
+/*   Created: 2017/10/10 12:36:53 by prossi            #+#    #+#             */
+/*   Updated: 2017/10/10 12:36:55 by prossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
 
-int		ft_open(t_a *a, char *argv)
+void		ft_init_struct(t_a *a, int option)
 {
-	if ((a->fd = open(argv, O_RDONLY)) == -1)
-		return (-1);
-	if (!(a->buf = ft_readfile(a->fd)))
-		return (-1);
-	return (0);
-}
-
-int		main(int argc, char **argv)
-{
-	t_a		a;
-
-	(void)argv;
-	if (argc != 2)
+	if (option == 0)
 	{
-		ft_affich(&a, 0);
-		return (-1);
+		a->b.count = 0;
+		a->b.countsp = 0;
+		a->b.tmp = 0;
+		a->b.tmpsp = 0;
+		a->b.i = -1;
+		a->b.countnl = 0;
 	}
-	if (ft_open(&a, argv[1]) == -1)
-	{
-		ft_affich(&a, 1);
-		return (-1);
-	}
-	if (ft_parsing(&a) == -1)
-	{
-		ft_affich(&a, 2);
-		return (-1);
-	}
-	return (0);
 }
