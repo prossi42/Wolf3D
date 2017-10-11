@@ -12,64 +12,44 @@
 
 #include "../include/wolf3d.h"
 
-// void	ft_get_number(t_first *first)
-// {
-// 	char	**tabnl;
-// 	char	**tabsp;
-// 	int		i;
-// 	int		j;
-// 	int		k;
-//
-// 	i = 0;
-// 	j = 0;
-// 	k = 0;
-// 	tabnl = NULL;
-// 	tabnl = ft_strsplit(a->buf, '\n');
-// 	while (tabnl[i])
-// 	{
-// 		tabsp = ft_strsplit(tabnl[i], ' ');
-// 		while (tabsp[j])
-// 		{
-// 			first->pa.tabi[k][j] = ft_atoi(tabsp[j]);
-// 			j++;
-// 		}
-// 		j = 0;
-// 		k++;
-// 		i++;
-// 	}
-// 	free(tabnl);
-// 	free(tabsp);
-// }
-
-void	ft_checksd(t_a *a)
+void	fill_with_one(t_a *a)
 {
-	int		i;
+	int		y;
+	int		x;
 
-	i = -1;
-	a->b.count = 0;
-	while (a->buf[++i])
+	y = -1;
+	while (++y < a->b.countnl + 2)
 	{
-		if (a->buf[i] >= 0 && a->buf[i] <= 9)
-			a->b.count++;
-		if (a->buf[i] == '\n')
-			break;
+		x = -1;
+		while (++x < a->b.tmp + 2)
+			a->tabi[y][x] = 1;
 	}
-	ft_putnbr(a->b.count);
+}
 
-	LE PUTAIN DE COUNT QUI MARCHE PAS A CAUSE CONDITION IF if (a->buf[i] >= 0 && a->buf[i] <= 9)
+void	create_walls(t_a *a)
+{
+	int		y;
+	int		x;
+
+	y = 0;
+	while (++y < a->b.countnl + 1)
+	{
+		x = 0;
+		while (++x < a->b.tmp + 1)
+			a->tabi[y][x] = a->tabtmp[y - 1][x - 1];
+	}
 }
 
 int		ft_count(t_a *a)
 {
 	while (a->buf[++a->b.i])
 	{
-		if (a->buf[a->b.i] >= 0 && a->buf[a->b.i] <= 9)
+		if (a->buf[a->b.i] >= '0' && a->buf[a->b.i] <= '9')
 			a->b.count++;
 		if (a->buf[a->b.i] == ' ')
 			a->b.countsp++;
 		if (a->buf[a->b.i] == '\n')
 		{
-			a->b.ct = a->b.count;
 			if (a->b.countnl != 0)
 			{
 				if (a->b.count != a->b.tmp)
@@ -116,10 +96,12 @@ int		ft_parsing(t_a *a)
 	ft_init_struct(a, 0);
 	if (ft_count(a) == -1)
 		return (-1);
-	ft_checksd(a);
-	ft_putstr("Nombre de chiffres :");
-	ft_putnbr(a->b.count);
-	ft_putstr("\nNombre de ligne :");
-	ft_putnbr(a->b.countnl);
+	a->tabtmp = ft_tabint(a->b.tmp, a->b.countnl);
+	a->tabi = ft_tabint(a->b.tmp + 2, a->b.countnl + 2);
+	fill_with_one(a);
+	ft_get_number(a);
+	create_walls(a);
+	a->xmax = a->b.tmp + 2;
+	a->ymax = a->b.countnl + 2;
 	return (0);
 }

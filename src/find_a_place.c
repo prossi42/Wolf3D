@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_struct.c                                   :+:      :+:    :+:   */
+/*   find_a_place.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/10 12:36:53 by prossi            #+#    #+#             */
-/*   Updated: 2017/10/10 12:36:55 by prossi           ###   ########.fr       */
+/*   Created: 2017/10/11 13:51:42 by prossi            #+#    #+#             */
+/*   Updated: 2017/10/11 13:51:43 by prossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
 
-void		ft_init_struct(t_a *a, int option)
+int		find_a_place(t_a *a)
 {
-	if (option == 0)
+	int		y;
+	int		x;
+
+	y = -1;
+	while (++y < a->ymax)
 	{
-		a->b.count = 0;
-		a->b.countsp = 0;
-		a->b.tmp = 0;
-		a->b.tmpsp = 0;
-		a->b.i = -1;
-		a->b.countnl = 0;
+		x = -1;
+		while (++x < a->xmax)
+		{
+			if (a->tabi[y][x] == 0)
+			{
+				a->d.posx = y;
+				a->d.posy = x;
+				return (0);
+			}
+		}
 	}
-	if (option == 1)
-		a->c.bpp = 4;
-	if (option == 2)
-	{
-		if (find_a_place(a) == 1)
-			ft_affich(a, 3);
-		a->d.dirX = -1;
-		a->d.dirY = 0;
-		a->d.planeX = 0;
-		a->d.planeY = 0.66;
-		a->d.time = 0;
-		a->d.oldtime = 0;
-	}
+	return (1);
 }

@@ -25,7 +25,6 @@ int		main(int argc, char **argv)
 {
 	t_a		a;
 
-	(void)argv;
 	if (argc != 2)
 	{
 		ft_affich(&a, 0);
@@ -41,5 +40,6 @@ int		main(int argc, char **argv)
 		ft_affich(&a, 2);
 		return (-1);
 	}
+	ft_mlx(&a);
 	return (0);
 }

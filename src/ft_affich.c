@@ -24,4 +24,10 @@ void		ft_affich(t_a *a, int option)
 		ft_putstr("\nError in Open or Read functions\n\n");
 	if (option == 2)
 		ft_putstr("\nMap error, consult usage --> ./wolf3d\n\n");
+	if (option == 3)
+	{
+		ft_putstr("\nThe Map has no floor\n");
+		ft_putstr("\t ---> Please put a '0'");
+		exit(1);
+	}
 }

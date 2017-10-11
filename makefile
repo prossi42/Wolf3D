@@ -16,7 +16,8 @@ NAME = wolf3d
 
 SRC_PATH = src
 
-SRC_NAME = main.c ft_affich.c ft_parsing.c ft_init_struct.c
+SRC_NAME = main.c ft_affich.c ft_parsing.c ft_init_struct.c ft_get_number.c \
+ft_mlx.c key_hook.c free_all.c cross_exit.c find_a_place.c raycaster.c
 
 # OBJ_PATH = $(SRC_PATH)
 
