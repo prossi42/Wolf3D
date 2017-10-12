@@ -12,6 +12,29 @@
 
 #include "../include/wolf3d.h"
 
+void	mlx_pixel_put_to_image(t_c c, int x, int y, int color)
+{
+	int			color1;
+	int			color2;
+	int			color3;
+	int			bit_pix;
+	float		img_size;
+
+	img_size = WINSIZE_X * WINSIZE_Y * c.bpp / 8;
+	if (x < 0 || y < 0 || y * c.size_line + x * c.bpp / 8 > \
+		img_size
+		|| x >= c.size_line / (c.bpp / 8) || y >= img_size / \
+		c.size_line)
+		return ;
+	color1 = color;
+	color2 = color >> 8;
+	color3 = color >> 16;
+	bit_pix = c.bpp / 8;
+	c.map[y * c.size_line + x * bit_pix] = color1;
+	c.map[y * c.size_line + x * bit_pix + 1] = color2;
+	c.map[y * c.size_line + x * bit_pix + 2] = color3;
+}
+
 void	ft_mlx(t_a *a)
 {
 	ft_init_struct(a, 1);

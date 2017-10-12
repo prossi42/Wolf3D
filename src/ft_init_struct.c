@@ -29,10 +29,10 @@ void		ft_init_struct(t_a *a, int option)
 	{
 		if (find_a_place(a) == 1)
 			ft_affich(a, 3);
-		a->d.dirX = -1;
-		a->d.dirY = 0;
-		a->d.planeX = 0;
-		a->d.planeY = 0.66;
+		a->d.dirx = -1;
+		a->d.diry = 0;
+		a->d.planex = 0;
+		a->d.planey = 0.66;
 		a->d.time = 0;
 		a->d.oldtime = 0;
 	}

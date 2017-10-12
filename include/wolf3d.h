@@ -46,6 +46,12 @@ typedef struct		s_d
 	int				stepy;
 	int				hit;
 	int				side;
+	int				lineheight;
+	int				drawstart;
+	int				drawend;
+	int				color;
+	int				tmpstart;
+	int				tmpend;
 }					t_d;
 
 typedef struct		s_c
@@ -92,4 +98,5 @@ void				free_all(t_a *a);
 void				cross_exit(t_a *a);
 int					find_a_place(t_a *a);
 void				raycaster(t_a *a);
+void				mlx_pixel_put_to_image(t_c c, int x, int y, int color);
 #endif

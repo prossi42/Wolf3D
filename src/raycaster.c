@@ -15,12 +15,13 @@
 void	raycaster(t_a *a)
 {
 	int		x;
+	int		y;
 
 	x = -1;
 	ft_init_struct(a, 2);
 	while (++x < WINSIZE_X)
 	{
-		a->d.camerax = 2 * x / (double)WINSIZE_x - 1;
+		a->d.camerax = 2 * x / (double)WINSIZE_X - 1;
 		a->d.rayposx = a->d.posx;
 		a->d.rayposy = a->d.posy;
 		a->d.raydirx = a->d.dirx + a->d.planex * a->d.camerax;
@@ -71,5 +72,23 @@ void	raycaster(t_a *a)
 			a->d.perpwalldist = (a->d.mapx - a->d.rayposx + (1 - a->d.stepx) / 2) / a->d.raydirx;
 		else
 			a->d.perpwalldist = (a->d.mapy - a->d.rayposy + (1 - a->d.stepy) / 2) / a->d.raydiry;
+		a->d.lineheight = (int)(WINSIZE_Y / a->d.perpwalldist);
+		a->d.drawstart = -a->d.lineheight / 2 + WINSIZE_Y / 2;
+		if (a->d.drawstart < 0)
+			a->d.drawstart = 0;
+		a->d.drawend = a->d.lineheight / 2 + WINSIZE_Y / 2;
+		if (a->d.drawend >= WINSIZE_Y)
+			a->d.drawend = WINSIZE_Y - 1;
+		a->d.color = 0xFFFFFF;
+		if (a->d.side == 1)
+			a->d.color = a->d.color / 2;
+		// a->d.tmpstart = a->d.drawstart;
+		// a->d.tmpend = a->d.drawend;
+		y = a->d.drawstart;
+		while (y < WINSIZE_Y)
+		{
+			mlx_pixel_put_to_image(a->c, x, y, 0xFF0000);
+			y++;
+		}
 	}
 }
