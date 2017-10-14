@@ -14,11 +14,25 @@
 # define WOLF3D_H
 
 # include <math.h>
+# include <sys/time.h>
+# include <stdio.h>
 # include "../mlx/mlx.h"
 # include "../libft/include/off_libft/libft.h"
 # include "../libft/include/pimp_libft/my_libft.h"
 # define WINSIZE_X 600
 # define WINSIZE_Y 600
+
+// typedef struct		timeval
+// {
+// 	time_t			tv_sec;
+// 	suseconds_t		tv_usec;
+// }					timeval;
+//
+// typedef struct		s_timezone
+// {
+// 	int				tz_minuteswest;
+// 	int				tz_dsttime;
+// }					t_timezone;
 
 typedef struct		s_d
 {
@@ -52,6 +66,11 @@ typedef struct		s_d
 	int				color;
 	int				tmpstart;
 	int				tmpend;
+	double			movespeed;
+	double			olddirx;
+	double			oldplanex;
+	double			rotspeed;
+	double			frametime;
 }					t_d;
 
 typedef struct		s_c
@@ -86,6 +105,8 @@ typedef struct		s_a
 	t_b				b;
 	t_c				c;
 	t_d				d;
+	// struct timeval	*tp;
+	// struct timezone	*tzp;
 }					t_a;
 
 void				ft_affich(t_a *a, int option);

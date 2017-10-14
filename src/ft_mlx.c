@@ -44,6 +44,7 @@ void	ft_mlx(t_a *a)
 	a->c.img = mlx_new_image(a->c.init, WINSIZE_X, WINSIZE_Y);
 	a->c.map = mlx_get_data_addr(a->c.img, &a->c.bpp, &a->c.size_line, \
 		&a->c.endian);
+	ft_init_struct(a, 2);
 	raycaster(a);
 	mlx_put_image_to_window(a->c.init, a->c.wdow, a->c.img, 0, 0);
 	mlx_hook(a->c.wdow, 2, (1L << 0), key_hook, a);

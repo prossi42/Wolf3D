@@ -14,6 +14,41 @@
 
 int		key_hook(int keycode, t_a *a)
 {
+	if (keycode == 126)
+	{
+		// printf("%f\n", a->d.posx);
+		// printf("%f\n", a->d.dirx);
+		printf("%f\n", a->d.movespeed);
+		if (a->tabi[(int)(a->d.posx + a->d.dirx * a->d.movespeed)][(int)a->d.posy] == 0)
+			a->d.posx += a->d.dirx *a->d.movespeed;
+		if (a->tabi[(int)a->d.posx][(int)(a->d.posy + a->d.diry * a->d.movespeed)] == 0)
+			a->d.posy += a->d.diry * a->d.movespeed;
+	}
+	if (keycode == 125)
+	{
+		if (a->tabi[(int)(a->d.posx - a->d.dirx * a->d.movespeed)][(int)a->d.posy] == 0)
+			a->d.posx -= a->d.dirx * a->d.movespeed;
+		if (a->tabi[(int)a->d.posx][(int)(a->d.posy - a->d.diry * a->d.movespeed)] == 0)
+			a->d.posy -= a->d.diry * a->d.movespeed;
+	}
+	if (keycode == 124)
+	{
+		a->d.olddirx = a->d.dirx;
+		a->d.dirx = a->d.dirx * cos(-a->d.rotspeed) - a->d.diry * sin(-a->d.rotspeed);
+		a->d.diry = a->d.olddirx * sin(-a->d.rotspeed) + a->d.diry * cos(-a->d.rotspeed);
+		a->d.oldplanex = a->d.planex;
+		a->d.planex = a->d.planex * cos(-a->d.rotspeed) - a->d.planey * sin(-a->d.rotspeed);
+		a->d.planey = a->d.oldplanex * sin(-a->d.rotspeed) + a->d.planey * sin(-a->d.rotspeed);
+	}
+	if (keycode == 123)
+	{
+		a->d.olddirx = a->d.dirx;
+		a->d.dirx = a->d.dirx * cos(a->d.rotspeed) - a->d.diry * sin(a->d.rotspeed);
+		a->d.diry = a->d.olddirx * sin(a->d.rotspeed) + a->d.diry * cos(a->d.rotspeed);
+		a->d.oldplanex = a->d.planex;
+		a->d.planex = a->d.planex * cos(a->d.rotspeed) - a->d.planey * sin(a->d.rotspeed);
+		a->d.planey = a->d.oldplanex * sin(a->d.rotspeed) + a->d.planey * sin(a->d.rotspeed);
+	}
 	if (keycode == 53)
 	{
 		free_all(a);

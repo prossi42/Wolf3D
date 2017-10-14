@@ -12,13 +12,32 @@
 
 #include "../include/wolf3d.h"
 
+void	fps_counter(t_a *a)
+{
+	struct timeval tp;
+	char			*tmp;
+
+	a->d.oldtime = a->d.time;
+	gettimeofday(&tp, NULL);
+	a->d.time = tp.tv_usec;
+	gettimeofday(&tp, NULL);
+	a->d.time = tp.tv_usec;
+	a->d.frametime = round((a->d.time - a->d.oldtime) / 1000);
+	if (a->d.frametime < 0)
+		fps_counter(a);
+	tmp = ft_itoa((int)a->d.frametime);
+	mlx_string_put(a->c.init, a->c.wdow, WINSIZE_X / 100, WINSIZE_Y / 100, 0xFFFFFF, tmp);
+	free(tmp);
+	a->d.movespeed = a->d.frametime * 0.003;
+	a->d.rotspeed = a->d.frametime * 0.003;
+}
+
 void	raycaster(t_a *a)
 {
 	int		x;
 	int		y;
 
 	x = -1;
-	ft_init_struct(a, 2);
 	while (++x < WINSIZE_X)
 	{
 		a->d.camerax = 2 * x / (double)WINSIZE_X - 1;
@@ -79,16 +98,23 @@ void	raycaster(t_a *a)
 		a->d.drawend = a->d.lineheight / 2 + WINSIZE_Y / 2;
 		if (a->d.drawend >= WINSIZE_Y)
 			a->d.drawend = WINSIZE_Y - 1;
-		a->d.color = 0xFFFFFF;
+		a->d.color = 0x3300FF;
 		if (a->d.side == 1)
-			a->d.color = a->d.color / 2;
+			a->d.color = 0xFFFFFF;
 		// a->d.tmpstart = a->d.drawstart;
 		// a->d.tmpend = a->d.drawend;
 		y = a->d.drawstart;
 		while (y < WINSIZE_Y)
 		{
-			mlx_pixel_put_to_image(a->c, x, y, 0xFF0000);
+			mlx_pixel_put_to_image(a->c, x, y, a->d.color);
+			y++;
+		}
+		y = a->d.drawend;
+		while (y < a->d.drawstart)
+		{
+			mlx_pixel_put_to_image(a->c, x, y, 0xFFFFFF);
 			y++;
 		}
 	}
+	fps_counter(a);
 }

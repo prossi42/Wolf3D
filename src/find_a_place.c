@@ -25,8 +25,8 @@ int		find_a_place(t_a *a)
 		{
 			if (a->tabi[y][x] == 0)
 			{
-				a->d.posx = y;
-				a->d.posy = x;
+				a->d.posx = 22;
+				a->d.posy = 12;
 				return (0);
 			}
 		}

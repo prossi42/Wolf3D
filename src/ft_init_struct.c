@@ -35,5 +35,7 @@ void		ft_init_struct(t_a *a, int option)
 		a->d.planey = 0.66;
 		a->d.time = 0;
 		a->d.oldtime = 0;
+		a->d.movespeed = 1;
+		a->d.rotspeed = 1;
 	}
 }
