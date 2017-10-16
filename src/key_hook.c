@@ -16,9 +16,6 @@ int		key_hook(int keycode, t_a *a)
 {
 	if (keycode == 126)
 	{
-		// printf("%f\n", a->d.posx);
-		// printf("%f\n", a->d.dirx);
-		printf("%f\n", a->d.movespeed);
 		if (a->tabi[(int)(a->d.posx + a->d.dirx * a->d.movespeed)][(int)a->d.posy] == 0)
 			a->d.posx += a->d.dirx *a->d.movespeed;
 		if (a->tabi[(int)a->d.posx][(int)(a->d.posy + a->d.diry * a->d.movespeed)] == 0)
@@ -38,7 +35,7 @@ int		key_hook(int keycode, t_a *a)
 		a->d.diry = a->d.olddirx * sin(-a->d.rotspeed) + a->d.diry * cos(-a->d.rotspeed);
 		a->d.oldplanex = a->d.planex;
 		a->d.planex = a->d.planex * cos(-a->d.rotspeed) - a->d.planey * sin(-a->d.rotspeed);
-		a->d.planey = a->d.oldplanex * sin(-a->d.rotspeed) + a->d.planey * sin(-a->d.rotspeed);
+		a->d.planey = a->d.oldplanex * sin(-a->d.rotspeed) + a->d.planey * cos(-a->d.rotspeed);
 	}
 	if (keycode == 123)
 	{
@@ -47,12 +44,16 @@ int		key_hook(int keycode, t_a *a)
 		a->d.diry = a->d.olddirx * sin(a->d.rotspeed) + a->d.diry * cos(a->d.rotspeed);
 		a->d.oldplanex = a->d.planex;
 		a->d.planex = a->d.planex * cos(a->d.rotspeed) - a->d.planey * sin(a->d.rotspeed);
-		a->d.planey = a->d.oldplanex * sin(a->d.rotspeed) + a->d.planey * sin(a->d.rotspeed);
+		a->d.planey = a->d.oldplanex * sin(a->d.rotspeed) + a->d.planey * cos(a->d.rotspeed);
 	}
 	if (keycode == 53)
 	{
 		free_all(a);
 		exit(1);
+	}
+	if (keycode == 36)
+	{
+		ft_init_struct(a, 2);
 	}
 	mlx_destroy_image(a->c.init, a->c.img);
 	a->c.img = mlx_new_image(a->c.init, WINSIZE_X, WINSIZE_Y);

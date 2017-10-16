@@ -26,7 +26,7 @@ void	fps_counter(t_a *a)
 	if (a->d.frametime < 0)
 		fps_counter(a);
 	tmp = ft_itoa((int)a->d.frametime);
-	mlx_string_put(a->c.init, a->c.wdow, WINSIZE_X / 100, WINSIZE_Y / 100, 0xFFFFFF, tmp);
+	mlx_string_put(a->c.init, a->c.wdow, 10, 10, 0xFFFFFF, tmp);
 	free(tmp);
 	a->d.movespeed = a->d.frametime * 0.003;
 	a->d.rotspeed = a->d.frametime * 0.003;
@@ -38,6 +38,7 @@ void	raycaster(t_a *a)
 	int		y;
 
 	x = -1;
+	fps_counter(a);
 	while (++x < WINSIZE_X)
 	{
 		a->d.camerax = 2 * x / (double)WINSIZE_X - 1;
@@ -100,7 +101,7 @@ void	raycaster(t_a *a)
 			a->d.drawend = WINSIZE_Y - 1;
 		a->d.color = 0x3300FF;
 		if (a->d.side == 1)
-			a->d.color = 0xFFFFFF;
+			a->d.color = 0x0000FF;
 		// a->d.tmpstart = a->d.drawstart;
 		// a->d.tmpend = a->d.drawend;
 		y = a->d.drawstart;
@@ -110,11 +111,10 @@ void	raycaster(t_a *a)
 			y++;
 		}
 		y = a->d.drawend;
-		while (y < a->d.drawstart)
-		{
-			mlx_pixel_put_to_image(a->c, x, y, 0xFFFFFF);
-			y++;
-		}
+		// while (y < a->d.drawstart)
+		// {
+		// 	mlx_pixel_put_to_image(a->c, x, y, 0xFFFFFF);
+		// 	y++;
+		// }
 	}
-	fps_counter(a);
 }
