@@ -18,6 +18,8 @@ int		find_a_place(t_a *a)
 	int		x;
 
 	y = -1;
+	a->d.posx = 0;
+	a->d.posy = 0;
 	while (++y < a->ymax)
 	{
 		x = -1;
@@ -25,9 +27,12 @@ int		find_a_place(t_a *a)
 		{
 			if (a->tabi[y][x] == 0)
 			{
-				a->d.posx = 22;
-				a->d.posy = 12;
-				return (0);
+				if (a->tabi[y][x - 1] == 0 && a->tabi[y][x + 1] == 0)
+					a->d.posx = x;
+				if (a->tabi[y - 1][x] == 0 && a->tabi[y + 1][x] == 0)
+					a->d.posy = y;
+				if (a->d.posx != 0 && a->d.posy != 0)
+					return (0);
 			}
 		}
 	}

@@ -22,18 +22,6 @@
 # define WINSIZE_X 600
 # define WINSIZE_Y 600
 
-// typedef struct		timeval
-// {
-// 	time_t			tv_sec;
-// 	suseconds_t		tv_usec;
-// }					timeval;
-//
-// typedef struct		s_timezone
-// {
-// 	int				tz_minuteswest;
-// 	int				tz_dsttime;
-// }					t_timezone;
-
 typedef struct		s_d
 {
 	double			posx;
@@ -120,4 +108,5 @@ void				cross_exit(t_a *a);
 int					find_a_place(t_a *a);
 void				raycaster(t_a *a);
 void				mlx_pixel_put_to_image(t_c c, int x, int y, int color);
+void				fps_counter(t_a *a);
 #endif

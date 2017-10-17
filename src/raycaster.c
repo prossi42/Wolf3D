@@ -12,33 +12,12 @@
 
 #include "../include/wolf3d.h"
 
-void	fps_counter(t_a *a)
-{
-	struct timeval tp;
-	char			*tmp;
-
-	a->d.oldtime = a->d.time;
-	gettimeofday(&tp, NULL);
-	a->d.time = tp.tv_usec;
-	gettimeofday(&tp, NULL);
-	a->d.time = tp.tv_usec;
-	a->d.frametime = round((a->d.time - a->d.oldtime) / 1000);
-	if (a->d.frametime < 0)
-		fps_counter(a);
-	tmp = ft_itoa((int)a->d.frametime);
-	mlx_string_put(a->c.init, a->c.wdow, 10, 10, 0xFFFFFF, tmp);
-	free(tmp);
-	a->d.movespeed = a->d.frametime * 0.003;
-	a->d.rotspeed = a->d.frametime * 0.003;
-}
-
 void	raycaster(t_a *a)
 {
 	int		x;
 	int		y;
 
 	x = -1;
-	fps_counter(a);
 	while (++x < WINSIZE_X)
 	{
 		a->d.camerax = 2 * x / (double)WINSIZE_X - 1;
@@ -78,12 +57,28 @@ void	raycaster(t_a *a)
 				a->d.sidedistx += a->d.deltadistx;
 				a->d.mapx += a->d.stepx;
 				a->d.side = 0;
+				// if (a->d.stepx == -1)
+				// 	a->d.side = 0;
+				// if (a->d.stepx == 1)
+				// 	a->d.side = 1;
+				// if (a->d.stepy == -1)
+				// 	a->d.side = 2;
+				// if (a->d.stepy == 1)
+				// 	a->d.side = 3;
 			}
 			else
 			{
 				a->d.sidedisty += a->d.deltadisty;
 				a->d.mapy += a->d.stepy;
 				a->d.side = 1;
+				// if (a->d.stepx == -1)
+				// 	a->d.side = 0;
+				// if (a->d.stepx == 1)
+				// 	a->d.side = 1;
+				// if (a->d.stepy == -1)
+				// 	a->d.side = 2;
+				// if (a->d.stepy == 1)
+				// 	a->d.side = 3;
 			}
 			if (a->tabi[a->d.mapx][a->d.mapy] > 0)
 				a->d.hit = 1;
@@ -93,28 +88,36 @@ void	raycaster(t_a *a)
 		else
 			a->d.perpwalldist = (a->d.mapy - a->d.rayposy + (1 - a->d.stepy) / 2) / a->d.raydiry;
 		a->d.lineheight = (int)(WINSIZE_Y / a->d.perpwalldist);
-		a->d.drawstart = -a->d.lineheight / 2 + WINSIZE_Y / 2;
+		a->d.drawstart = (-a->d.lineheight / 2) + (WINSIZE_Y / 2);
 		if (a->d.drawstart < 0)
 			a->d.drawstart = 0;
-		a->d.drawend = a->d.lineheight / 2 + WINSIZE_Y / 2;
+		a->d.drawend = (a->d.lineheight / 2) + (WINSIZE_Y / 2);
 		if (a->d.drawend >= WINSIZE_Y)
 			a->d.drawend = WINSIZE_Y - 1;
-		a->d.color = 0x3300FF;
+		if (a->d.side == 0)
+			a->d.color = 0xFFFF00;
 		if (a->d.side == 1)
-			a->d.color = 0x0000FF;
-		// a->d.tmpstart = a->d.drawstart;
-		// a->d.tmpend = a->d.drawend;
-		y = a->d.drawstart;
-		while (y < WINSIZE_Y)
-		{
+			a->d.color = 0xCC0066;
+		if (a->d.side == 2)
+			a->d.color = 0x3333FF;
+		if (a->d.side == 3)
+			a->d.color = 0x339900;
+		y = a->d.drawstart - 1;
+		while (++y < a->d.drawend)
 			mlx_pixel_put_to_image(a->c, x, y, a->d.color);
-			y++;
-		}
-		y = a->d.drawend;
-		// while (y < a->d.drawstart)
 		// {
-		// 	mlx_pixel_put_to_image(a->c, x, y, 0xFFFFFF);
-		// 	y++;
+		// 	if (x <= (WINSIZE_X / 3))
+		// 		mlx_pixel_put_to_image(a->c, x, y, 0x0000FF);
+		// 	if (x > (WINSIZE_X / 3) && x <= ((WINSIZE_X / 3) * 2))
+		// 		mlx_pixel_put_to_image(a->c, x, y, 0xFFFFFF);
+		// 	if (x > ((WINSIZE_X / 3) * 2))
+		// 		mlx_pixel_put_to_image(a->c, x, y, 0xFF0000);
 		// }
+		y = a->d.drawend - 1;
+		while (++y < WINSIZE_Y)
+			mlx_pixel_put_to_image(a->c, x, y, 0x333333);
+		y = -1;
+		while (++y < a->d.drawstart)
+			mlx_pixel_put_to_image(a->c, x, y, 0x333333);
 	}
 }

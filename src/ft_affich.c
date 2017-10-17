@@ -28,6 +28,7 @@ void		ft_affich(t_a *a, int option)
 	{
 		ft_putstr("\nThe Map has no floor\n");
 		ft_putstr("\t ---> Please put a '0'");
+		ft_putstr("\nOr I can't find a place to spawn");
 		exit(1);
 	}
 }

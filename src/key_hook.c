@@ -60,6 +60,7 @@ int		key_hook(int keycode, t_a *a)
 	a->c.map = mlx_get_data_addr(a->c.img, &a->c.bpp, \
 		&a->c.size_line, &a->c.endian);
 	raycaster(a);
+	fps_counter(a);
 	mlx_put_image_to_window(a->c.init, a->c.wdow, a->c.img, 0, 0);
 	return (0);
 }
