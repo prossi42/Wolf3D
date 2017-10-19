@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc_free.c                                  :+:      :+:    :+:   */
+/*   sol.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/27 03:02:40 by prossi            #+#    #+#             */
-/*   Updated: 2017/05/27 03:12:14 by prossi           ###   ########.fr       */
+/*   Created: 2017/10/19 11:59:04 by prossi            #+#    #+#             */
+/*   Updated: 2017/10/19 11:59:06 by prossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/pimp_libft/my_libft.h"
+#include "../include/wolf3d.h"
 
-char		*ft_realloc_free(char *init, int len)
+void	sol(t_a *a, int x, int y)
 {
-	char		*end;
-	int			i;
-
-	i = 0;
-	if (!(end = ft_strnew(len + ft_strlen(init))))
-		return (NULL);
-	while (init[i])
-	{
-		end[i] = init[i];
-		i++;
-	}
-	end[i] = '\0';
-	ft_strdel(&init);
-	return (end);
+	y = a->d.drawend - 1;
+	while (++y < WINSIZE_Y)
+		mlx_pixel_put_to_image(a->c, x, y, 0x666699);
 }

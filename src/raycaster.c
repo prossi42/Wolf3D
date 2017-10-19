@@ -18,6 +18,7 @@ void	raycaster(t_a *a)
 	int		y;
 
 	x = -1;
+	y = 0;
 	while (++x < WINSIZE_X)
 	{
 		a->d.camerax = 2 * x / (double)WINSIZE_X - 1;
@@ -56,34 +57,26 @@ void	raycaster(t_a *a)
 			{
 				a->d.sidedistx += a->d.deltadistx;
 				a->d.mapx += a->d.stepx;
-				a->d.side = 0;
-				// if (a->d.stepx == -1)
-				// 	a->d.side = 0;
-				// if (a->d.stepx == 1)
-				// 	a->d.side = 1;
-				// if (a->d.stepy == -1)
-				// 	a->d.side = 2;
-				// if (a->d.stepy == 1)
-				// 	a->d.side = 3;
+				// a->d.side = 0;
+				if (a->d.stepx == -1)
+					a->d.side = 0;
+				if (a->d.stepx == 1)
+					a->d.side = 1;
 			}
 			else
 			{
 				a->d.sidedisty += a->d.deltadisty;
 				a->d.mapy += a->d.stepy;
-				a->d.side = 1;
-				// if (a->d.stepx == -1)
-				// 	a->d.side = 0;
-				// if (a->d.stepx == 1)
-				// 	a->d.side = 1;
-				// if (a->d.stepy == -1)
-				// 	a->d.side = 2;
-				// if (a->d.stepy == 1)
-				// 	a->d.side = 3;
+				// a->d.side = 1;
+				if (a->d.stepy == -1)
+					a->d.side = 2;
+				if (a->d.stepy == 1)
+					a->d.side = 3;
 			}
 			if (a->tabi[a->d.mapx][a->d.mapy] > 0)
 				a->d.hit = 1;
 		}
-		if (a->d.side == 0)
+		if (a->d.side == 0 || a->d.side == 1)
 			a->d.perpwalldist = (a->d.mapx - a->d.rayposx + (1 - a->d.stepx) / 2) / a->d.raydirx;
 		else
 			a->d.perpwalldist = (a->d.mapy - a->d.rayposy + (1 - a->d.stepy) / 2) / a->d.raydiry;
@@ -94,30 +87,8 @@ void	raycaster(t_a *a)
 		a->d.drawend = (a->d.lineheight / 2) + (WINSIZE_Y / 2);
 		if (a->d.drawend >= WINSIZE_Y)
 			a->d.drawend = WINSIZE_Y - 1;
-		if (a->d.side == 0)
-			a->d.color = 0xFFFF00;
-		if (a->d.side == 1)
-			a->d.color = 0xCC0066;
-		if (a->d.side == 2)
-			a->d.color = 0x3333FF;
-		if (a->d.side == 3)
-			a->d.color = 0x339900;
-		y = a->d.drawstart - 1;
-		while (++y < a->d.drawend)
-			mlx_pixel_put_to_image(a->c, x, y, a->d.color);
-		// {
-		// 	if (x <= (WINSIZE_X / 3))
-		// 		mlx_pixel_put_to_image(a->c, x, y, 0x0000FF);
-		// 	if (x > (WINSIZE_X / 3) && x <= ((WINSIZE_X / 3) * 2))
-		// 		mlx_pixel_put_to_image(a->c, x, y, 0xFFFFFF);
-		// 	if (x > ((WINSIZE_X / 3) * 2))
-		// 		mlx_pixel_put_to_image(a->c, x, y, 0xFF0000);
-		// }
-		y = a->d.drawend - 1;
-		while (++y < WINSIZE_Y)
-			mlx_pixel_put_to_image(a->c, x, y, 0x333333);
-		y = -1;
-		while (++y < a->d.drawstart)
-			mlx_pixel_put_to_image(a->c, x, y, 0x333333);
+		mur(a, x, y);
+		sol(a, x, y);
+		ciel(a, x, y);
 	}
 }

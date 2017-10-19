@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc_free.c                                  :+:      :+:    :+:   */
+/*   ciel.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/27 03:02:40 by prossi            #+#    #+#             */
-/*   Updated: 2017/05/27 03:12:14 by prossi           ###   ########.fr       */
+/*   Created: 2017/10/19 11:58:57 by prossi            #+#    #+#             */
+/*   Updated: 2017/10/19 11:58:59 by prossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/pimp_libft/my_libft.h"
+#include "../include/wolf3d.h"
 
-char		*ft_realloc_free(char *init, int len)
+void	ciel(t_a *a, int x, int y)
 {
-	char		*end;
-	int			i;
-
-	i = 0;
-	if (!(end = ft_strnew(len + ft_strlen(init))))
-		return (NULL);
-	while (init[i])
-	{
-		end[i] = init[i];
-		i++;
-	}
-	end[i] = '\0';
-	ft_strdel(&init);
-	return (end);
+	y = -1;
+	while (++y < a->d.drawstart)
+		mlx_pixel_put_to_image(a->c, x, y, 0xFFFFFF + y);
 }

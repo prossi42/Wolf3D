@@ -37,5 +37,8 @@ void		ft_init_struct(t_a *a, int option)
 		a->d.oldtime = 0;
 		a->d.movespeed = 1;
 		a->d.rotspeed = 1;
+		a->e.flag = 0;
+		a->e.oldx = 0;
+		a->e.mouse = 0;
 	}
 }

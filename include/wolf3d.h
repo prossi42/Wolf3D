@@ -22,6 +22,15 @@
 # define WINSIZE_X 600
 # define WINSIZE_Y 600
 
+typedef struct		s_e
+{
+	void			*init;
+	void			*wdow;
+	int				flag;
+	int				oldx;
+	int				mouse;
+}					t_e;
+
 typedef struct		s_d
 {
 	double			posx;
@@ -93,8 +102,7 @@ typedef struct		s_a
 	t_b				b;
 	t_c				c;
 	t_d				d;
-	// struct timeval	*tp;
-	// struct timezone	*tzp;
+	t_e				e;
 }					t_a;
 
 void				ft_affich(t_a *a, int option);
@@ -109,4 +117,11 @@ int					find_a_place(t_a *a);
 void				raycaster(t_a *a);
 void				mlx_pixel_put_to_image(t_c c, int x, int y, int color);
 void				fps_counter(t_a *a);
+void				key_bindings(t_a *a);
+void				ciel(t_a *a, int x, int y);
+void				sol(t_a *a, int x, int y);
+void				mur(t_a *a, int x, int y);
+void				flag(t_a *a, int x, int y);
+int					mouse_hook(int x, int y, t_a *a);
+int					roll_hook(int button, int x, int y, t_a *a);
 #endif

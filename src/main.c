@@ -12,6 +12,22 @@
 
 #include "../include/wolf3d.h"
 
+int		check_ext(char *argv)
+{
+	int		c;
+
+	c = ft_strlen(argv) - 1;
+	if (argv[c] != 'd')
+		return (-1);
+	if (argv[c - 1] != '3')
+		return (-1);
+	if (argv[c - 2] != 'w')
+		return (-1);
+	if (argv[c - 3] != '.')
+		return (-1);
+	return (0);
+}
+
 int		ft_open(t_a *a, char *argv)
 {
 	if ((a->fd = open(argv, O_RDONLY)) == -1)
@@ -26,6 +42,11 @@ int		main(int argc, char **argv)
 	t_a		a;
 
 	if (argc != 2)
+	{
+		ft_affich(&a, 0);
+		return (-1);
+	}
+	if (check_ext(argv[1]) == -1)
 	{
 		ft_affich(&a, 0);
 		return (-1);

@@ -24,17 +24,16 @@ int		find_a_place(t_a *a)
 	{
 		x = -1;
 		while (++x < a->xmax)
-		{
 			if (a->tabi[y][x] == 0)
-			{
-				if (a->tabi[y][x - 1] == 0 && a->tabi[y][x + 1] == 0)
+				if (a->tabi[y][x - 1] == 0 && a->tabi[y][x + 1] == 0 && \
+					a->tabi[y - 1][x] == 0 && a->tabi[y + 1][x] == 0 && \
+					a->tabi[y - 1][x - 1] == 0 && a->tabi[y + 1][x + 1] == 0 \
+					&& a->tabi[y + 1][x - 1] == 0 && a->tabi[y - 1][x + 1] == 0)
+				{
 					a->d.posx = x;
-				if (a->tabi[y - 1][x] == 0 && a->tabi[y + 1][x] == 0)
-					a->d.posy = y;
-				if (a->d.posx != 0 && a->d.posy != 0)
+					a->d.posy = y + 1;
 					return (0);
-			}
-		}
+				}
 	}
 	return (1);
 }

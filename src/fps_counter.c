@@ -26,8 +26,9 @@ void	fps_counter(t_a *a)
 	if (a->d.frametime < 0)
 		fps_counter(a);
 	tmp = ft_itoa((int)a->d.frametime);
-	mlx_string_put(a->c.init, a->c.wdow, 10, 10, 0xFFFFFF, tmp);
+	mlx_string_put(a->c.init, a->c.wdow, 10, 50, 0xFF0000, "FPS:");
+	mlx_string_put(a->c.init, a->c.wdow, 50, 50, 0xFF0000, tmp);
 	free(tmp);
 	a->d.movespeed = a->d.frametime * 0.003;
-	a->d.rotspeed = a->d.frametime * 0.003;
+	a->d.rotspeed = a->d.frametime * 0.002;
 }
