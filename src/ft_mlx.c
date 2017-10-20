@@ -46,11 +46,10 @@ void	ft_mlx(t_a *a)
 		&a->c.endian);
 	ft_init_struct(a, 2);
 	raycaster(a);
-	mlx_put_image_to_window(a->c.init, a->c.wdow, a->c.img, 0, 0);
-	fps_counter(a);
 	mlx_hook(a->c.wdow, 2, (1L << 0), key_hook, a);
 	mlx_hook(a->c.wdow, 6, (1L << 6), mouse_hook, a);
 	mlx_hook(a->c.wdow, 4, (1L << 2), roll_hook, a);
 	mlx_hook(a->c.wdow, 17, (1L << 17), (int(*)())cross_exit, a);
+	mlx_loop_hook(a->c.init, (int(*)())raycaster, a);
 	mlx_loop(a->c.init);
 }

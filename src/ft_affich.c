@@ -17,7 +17,7 @@ void		ft_affich(t_a *a, int option)
 	(void)a;
 	if (option == 0)
 	{
-		ft_putstr("\nusage : ./wolf3d map\n");
+		ft_putstr("usage : ./wolf3d map\n");
 		ft_putstr("\t ---> Square map only fill with 0 -> 9 and spaces\n");
 		ft_putstr("\t ---> The file extension must be .w3d");
 	}

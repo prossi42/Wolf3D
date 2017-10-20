@@ -33,10 +33,10 @@ void	ft_get_number(t_a *a)
 			a->tabtmp[k][j] = ft_atoi(tabsp[j]);
 			j++;
 		}
+		freetabchar(tabsp, a->b.tmp);
 		j = 0;
 		k++;
 		i++;
 	}
-	free(tabnl);
-	free(tabsp);
+	freetabchar(tabnl, a->b.countnl);
 }

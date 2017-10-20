@@ -96,8 +96,10 @@ int		ft_parsing(t_a *a)
 	ft_init_struct(a, 0);
 	if (ft_count(a) == -1)
 		return (-1);
-	a->tabtmp = ft_tabint(a->b.tmp, a->b.countnl);
-	a->tabi = ft_tabint(a->b.tmp + 2, a->b.countnl + 2);
+	if (!(a->tabtmp = ft_tabint(a->b.tmp, a->b.countnl)))
+		return (-1);
+	if (!(a->tabi = ft_tabint(a->b.tmp + 2, a->b.countnl + 2)))
+		return (-1);
 	fill_with_one(a);
 	ft_get_number(a);
 	create_walls(a);

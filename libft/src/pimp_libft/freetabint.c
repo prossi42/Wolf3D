@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_all.c                                         :+:      :+:    :+:   */
+/*   freetabint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prossi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/11 12:43:03 by prossi            #+#    #+#             */
-/*   Updated: 2017/10/11 12:43:04 by prossi           ###   ########.fr       */
+/*   Created: 2017/10/20 12:49:50 by prossi            #+#    #+#             */
+/*   Updated: 2017/10/20 12:49:51 by prossi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/wolf3d.h"
+#include "../../include/pimp_libft/my_libft.h"
 
-void	free_all(t_a *a)
+void	freetabint(int **tab, int ymax)
 {
-	freetabint(a->tabi, a->ymax);
-	freetabint(a->tabtmp, a->b.countnl);
+	int		y;
+
+	y = -1;
+	while (++y < ymax)
+		free(tab[y]);
+	free(tab);
+	tab = NULL;
 }

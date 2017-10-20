@@ -15,7 +15,7 @@
 int		key(int keycode)
 {
 	if (keycode == 53)
-		exit (-1);
+		exit(1);
 	return (0);
 }
 
@@ -25,10 +25,10 @@ void	risingsun(t_a *a)
 	int		y;
 
 	x = -1;
-	while(++x < WINSIZE_X)
+	while (++x < WINSIZE_X)
 	{
 		y = -1;
-		while(++y < WINSIZE_Y)
+		while (++y < WINSIZE_Y)
 			mlx_pixel_put(a->e.init, a->e.wdow, x, y, 0xFFFFFF - y);
 	}
 }
@@ -41,16 +41,18 @@ void	key_bindings(t_a *a)
 	risingsun(a);
 	mlx_string_put(a->e.init, a->e.wdow, 200, 0, 0xFF6633, \
 		"Here comes the sun <3");
-	mlx_string_put(a->e.init, a->e.wdow, 0, 50, 0xFF9900 - 1, \
+	mlx_string_put(a->e.init, a->e.wdow, 0, 50, 0xFF9900, \
 		"Quitter : Esc or Red Cross");
-	mlx_string_put(a->e.init, a->e.wdow, 0, 75, 0xFF9900 - 2, \
+	mlx_string_put(a->e.init, a->e.wdow, 0, 75, 0xFF9900, \
 		"Reset : Return");
-	mlx_string_put(a->e.init, a->e.wdow, 0, 100, 0xFF9900 - 3, \
+	mlx_string_put(a->e.init, a->e.wdow, 0, 100, 0xFF9900, \
 		"Deplacement : Fleches Dir. / W-A-S-D");
-	mlx_string_put(a->e.init, a->e.wdow, 0, 125, 0xFF9900 - 4, \
+	mlx_string_put(a->e.init, a->e.wdow, 0, 125, 0xFF9900, \
 		"Mode flag : F");
-	mlx_string_put(a->e.init, a->e.wdow, 0, 150, 0xFF9900 - 5, \
+	mlx_string_put(a->e.init, a->e.wdow, 0, 150, 0xFF9900, \
 		"Mode souris : M (Gauche/droite: tourner / molette: av./rec.)");
+	mlx_string_put(a->e.init, a->e.wdow, 0, 175, 0xFF9900, \
+		"Sprint : Shift");
 	mlx_hook(a->e.wdow, 2, (1L << 0), key, a);
 	mlx_loop(a->e.init);
 }

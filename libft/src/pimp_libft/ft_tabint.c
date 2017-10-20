@@ -19,10 +19,12 @@ int		**ft_tabint(int x, int y)
 
 	i = 0;
 	tabi = 0;
-	tabi = (int **)malloc(sizeof(int *) * y);
+	if (!(tabi = (int **)malloc(sizeof(int *) * y)))
+		return (NULL);
 	while (i < y)
 	{
-		tabi[i] = (int *)malloc(sizeof(int) * x);
+		if (!(tabi[i] = (int *)malloc(sizeof(int) * x)))
+			return (NULL);
 		i++;
 	}
 	return (tabi);

@@ -29,6 +29,7 @@ typedef struct		s_e
 	int				flag;
 	int				oldx;
 	int				mouse;
+	double			speed;
 }					t_e;
 
 typedef struct		s_d
@@ -94,7 +95,7 @@ typedef struct		s_b
 typedef struct		s_a
 {
 	int				fd;
-	char			*buf;
+	char			buf[BUFF_SIZE + 1];
 	int				**tabi;
 	int				**tabtmp;
 	int				xmax;

@@ -12,6 +12,24 @@
 
 #include "../include/wolf3d.h"
 
+void		ft_init_struct_sd(t_a *a)
+{
+	if (find_a_place(a) == 1)
+		ft_affich(a, 3);
+	a->d.dirx = -1;
+	a->d.diry = 0;
+	a->d.planex = 0;
+	a->d.planey = 0.66;
+	a->d.time = 0;
+	a->d.oldtime = 0;
+	a->d.movespeed = 1;
+	a->d.rotspeed = 1;
+	a->e.flag = 0;
+	a->e.oldx = 0;
+	a->e.mouse = 0;
+	a->e.speed = 0.003;
+}
+
 void		ft_init_struct(t_a *a, int option)
 {
 	if (option == 0)
@@ -26,19 +44,5 @@ void		ft_init_struct(t_a *a, int option)
 	if (option == 1)
 		a->c.bpp = 4;
 	if (option == 2)
-	{
-		if (find_a_place(a) == 1)
-			ft_affich(a, 3);
-		a->d.dirx = -1;
-		a->d.diry = 0;
-		a->d.planex = 0;
-		a->d.planey = 0.66;
-		a->d.time = 0;
-		a->d.oldtime = 0;
-		a->d.movespeed = 1;
-		a->d.rotspeed = 1;
-		a->e.flag = 0;
-		a->e.oldx = 0;
-		a->e.mouse = 0;
-	}
+		ft_init_struct_sd(a);
 }

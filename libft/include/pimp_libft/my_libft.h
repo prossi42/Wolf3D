@@ -29,5 +29,7 @@ int			get_next_line(const int fd, char **line);
 char		*ft_realloc_free(char *init, int len);
 char		*ft_strjoin_free(char *s1, char *s2, int option);
 int			**ft_tabint(int x, int y);
+void		freetabint(int **tab, int ymax);
+void		freetabchar(char **tab, int ymax);
 
 #endif

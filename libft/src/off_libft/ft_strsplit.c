@@ -42,7 +42,8 @@ static char			*ft_newstr(const char *s, char c, int i)
 	j = i;
 	while (s[j] && s[j] != c)
 		j++;
-	str = (char *)malloc(sizeof(char) * (j - i) + 1);
+	if (!(str = (char *)malloc(sizeof(char) * (j - i) + 1)))
+		return (NULL);
 	j = 0;
 	while (s[i] && s[i] != c)
 		str[j++] = s[i++];

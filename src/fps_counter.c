@@ -14,7 +14,7 @@
 
 void	fps_counter(t_a *a)
 {
-	struct timeval 	tp;
+	struct timeval	tp;
 	char			*tmp;
 
 	a->d.oldtime = a->d.time;
@@ -26,9 +26,11 @@ void	fps_counter(t_a *a)
 	if (a->d.frametime < 0)
 		fps_counter(a);
 	tmp = ft_itoa((int)a->d.frametime);
-	mlx_string_put(a->c.init, a->c.wdow, 10, 50, 0xFF0000, "FPS:");
-	mlx_string_put(a->c.init, a->c.wdow, 50, 50, 0xFF0000, tmp);
+	mlx_string_put(a->c.init, a->c.wdow, WINSIZE_X / 100, WINSIZE_Y / 100, \
+		0xFF0000, "FPS:");
+	mlx_string_put(a->c.init, a->c.wdow, WINSIZE_X / 100 + 40, \
+		WINSIZE_Y / 100, 0xFF0000, tmp);
 	free(tmp);
-	a->d.movespeed = a->d.frametime * 0.003;
-	a->d.rotspeed = a->d.frametime * 0.002;
+	a->d.movespeed = a->d.frametime * a->e.speed;
+	a->d.rotspeed = a->d.frametime * 0.003;
 }

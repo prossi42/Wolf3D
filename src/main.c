@@ -30,10 +30,10 @@ int		check_ext(char *argv)
 
 int		ft_open(t_a *a, char *argv)
 {
-	if ((a->fd = open(argv, O_RDONLY)) == -1)
+	if ((a->fd = open(argv, O_RDONLY)) < 0)
 		return (-1);
-	if (!(a->buf = ft_readfile(a->fd)))
-		return (-1);
+	a->buf[read(a->fd, a->buf, BUFF_SIZE)] = '\0';
+	close(a->fd);
 	return (0);
 }
 
